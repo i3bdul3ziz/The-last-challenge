@@ -11,7 +11,7 @@ export default class Nave extends Component {
                         <Navbar.Brand>Qc</Navbar.Brand>
                        
                         <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/Allmovie">Allmovie</Nav.Link>
+                        <Nav.Link as={Link} to="/Allmovie">All movie</Nav.Link>
                         <Nav.Link as={Link} to="/About">About</Nav.Link>
                     </Nav>
                     <Nav>

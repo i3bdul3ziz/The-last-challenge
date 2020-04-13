@@ -17,12 +17,10 @@ export default class App extends Component {
 
       <Switch>
 
-        <Route path="/home" component={Home} />
+        <Route path="/home" render={()=> <Home name = {"yasir"}/>} />
         <Route path="/about" component={About} />
-        <Route path="/Allmovei" component={Allmovies} />
-       {/* <Home /> 
-      <About />
-      <Allmovies /> */}
+        <Route path="/Allmovie" component={Allmovies} />
+      
 
       </Switch>
 
