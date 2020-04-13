@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 export default class Nave extends Component {
     render() {
         return (
@@ -8,9 +9,10 @@ export default class Nave extends Component {
                 <Navbar bg="dark" variant="dark">
                     <Nav className="mr-auto">
                         <Navbar.Brand>Qc</Navbar.Brand>
-                        <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/Allmovie">Allmovie</Nav.Link>
-                        <Nav.Link href="/About">About</Nav.Link>
+                       
+                        <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/Allmovie">Allmovie</Nav.Link>
+                        <Nav.Link as={Link} to="/About">About</Nav.Link>
                     </Nav>
                     <Nav>
                         <Button variant="outline-light" > login</Button>
