@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import MoveiCard from './MoveiCard'
 import axios from "axios"
-
+import Khalid from 'react-animation-h3ro-yasir'
 export default class Allmovies extends Component {
 
     state = {
@@ -16,22 +16,47 @@ export default class Allmovies extends Component {
         axios.get('https://sei12.herokuapp.com/movei/json')
             .then(res => {
                 this.setState({
-                    allMoveis: res.data
+                    allMoveis: res.data,
+                    selectedMoveis: res.data,
+                      
                 })
+                setTimeout(() => {
+                    this.setState({
+                        loading : true
+                    })
+                }, 3000);
             }).catch(err => console.log(err))
 
 
 
     }
 
+    filterMoveis = ({target:{value}})=>{
+        
+        if (value == "All")
+        {
+            this.setState({
+                selectedMoveis : this.state.allMoveis
+            })
+        }else{
+            this.setState({
+                selectedMoveis : this.state.allMoveis.filter(movei =>{
 
+                    return movei.typee == value
+                }
+                )
+            })
+        }
+
+
+    }
 
 
 
     render() {
         console.log(this.state.allMoveis)
 
-        let allmoveis = this.state.allMoveis.map(movei => {
+        let allmoveis = this.state.selectedMoveis.map(movei => {
 
 
             if (movei.link) return <MoveiCard movei={movei} />
@@ -45,15 +70,14 @@ export default class Allmovies extends Component {
                     <Row className="mt-5 justify-content-center">
                         <Col md={4}>
                         <Form.Label>Example select</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control as="select" onChange={(e) =>this.filterMoveis(e)}>
                             {Array.from(new Set(types)).map(ele => (<option>{ele}</option>))}
-                          
                         </Form.Control>
                         </Col>
                     </Row>
                 <Row className="mt-5 justify-content-center" >
 
-                    {allmoveis}
+                     {this.state.loading ?  allmoveis : (<Khalid />) }
 
                 </Row>
 
