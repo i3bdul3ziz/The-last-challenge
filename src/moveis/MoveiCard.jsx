@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Col, Image, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link , withRouter } from 'react-router-dom'
 
-export default class MoveiCard extends Component {
+ class MoveiCard extends Component {
     render() {
 
         let { YourName, link, name, typee, history , _id} = this.props.movei
@@ -19,3 +19,5 @@ export default class MoveiCard extends Component {
         )
     }
 }
+
+export default withRouter(MoveiCard)
