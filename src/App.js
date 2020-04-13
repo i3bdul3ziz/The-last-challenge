@@ -5,6 +5,7 @@ import Home from './home/Home';
 import About from './about/About';
 import Allmovies from './moveis/Allmovies';
 import {Switch , Route} from 'react-router-dom'
+import OneMovei from './moveis/OneMovei.jsx';
 
 
 
@@ -19,7 +20,9 @@ export default class App extends Component {
 
         <Route path="/home" render={()=> <Home name = {"yasir"}/>} />
         <Route path="/about" component={About} />
-        <Route path="/Allmovie" component={Allmovies} />
+        <Route exact path="/Allmovie" component={Allmovies} />
+
+        <Route path = '/Allmovie/:id' component={OneMovei} />
       
 
       </Switch>

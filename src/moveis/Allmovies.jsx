@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import MoveiCard from './MoveiCard'
 import axios from "axios"
-import Khalid from 'react-animation-h3ro-yasir'
+import Circle from 'react-animation-h3ro-yasir'
+
 export default class Allmovies extends Component {
 
     state = {
@@ -77,7 +78,7 @@ export default class Allmovies extends Component {
                     </Row>
                 <Row className="mt-5 justify-content-center" >
 
-                     {this.state.loading ?  allmoveis : (<Khalid />) }
+                     {this.state.loading ?  allmoveis : (<Circle />) }
 
                 </Row>
 
