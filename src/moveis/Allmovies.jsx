@@ -3,84 +3,87 @@ import { Container, Row, Col, Form } from 'react-bootstrap'
 import MoveiCard from './MoveiCard'
 import axios from "axios"
 import Circle from 'react-animation-h3ro-yasir'
-
+function solve(object, array) {
+    let fee = array
+    for (const key in object) {
+        if (object[key] != "All") fee = fee.filter(el => el[key] == object[key] || Number(object[key].split('-')[0]) < el[key] & Number(object[key].split('-')[1]) > el[key])
+    }
+    return fee
+}
 export default class Allmovies extends Component {
 
     state = {
         allMoveis: [],
         loading: false,
-        selectedMoveis: []
+        selectedMoveis: [],
+        felter: { typee: "All", proposal: "All", history: "All" }
+
     }
-
     componentDidMount() {
-
         axios.get('https://sei12.herokuapp.com/movei/json')
             .then(res => {
+                console.log(res)
                 this.setState({
                     allMoveis: res.data,
                     selectedMoveis: res.data,
-                      
+                    loading: true
                 })
-                setTimeout(() => {
-                    this.setState({
-                        loading : true
-                    })
-                }, 3000);
             }).catch(err => console.log(err))
-
-
-
     }
-
-    filterMoveis = ({target:{value}})=>{
-        
-        if (value == "All")
-        {
-            this.setState({
-                selectedMoveis : this.state.allMoveis
-            })
-        }else{
-            this.setState({
-                selectedMoveis : this.state.allMoveis.filter(movei =>{
-
-                    return movei.typee == value
-                }
-                )
-            })
-        }
-
-
+// function filter the movei 
+    filterMoveis = ({ target: { name, value } }) => {
+    //  test the output 
+    console.log(name , value)
     }
 
 
 
     render() {
-        console.log(this.state.allMoveis)
 
         let allmoveis = this.state.selectedMoveis.map(movei => {
 
-
             if (movei.link) return <MoveiCard movei={movei} />
         })
-        let types = this.state.allMoveis.map(movei =>movei.typee)
-            types.unshift("All")
+        let types = this.state.allMoveis.map(movei => movei.typee)
+
         return (
             <div>
                 <h1>All movie</h1>
                 <Container className="mt-5">
                     <Row className="mt-5 justify-content-center">
-                        <Col md={4}>
-                        <Form.Label>Example select</Form.Label>
-                        <Form.Control as="select" onChange={(e) =>this.filterMoveis(e)}>
-                            {Array.from(new Set(types)).map(ele => (<option>{ele}</option>))}
-                        </Form.Control>
+                          {/*  ================  Type  ===============*/}
+                        <Col md={2}>
+                            <Form.Label style={{ color: "white" }} >Type</Form.Label>
+                            <Form.Control as="select" name="typee" onChange={(e) => this.filterMoveis(e)}>
+                                <option>All</option>
+                                {Array.from(new Set(types)).map(ele => (<option>{ele}</option>))}
+                            </Form.Control>
+                        </Col>
+                           {/* =============== Proposal =============== */}
+                        <Col md={2}>
+                            <Form.Label style={{ color: "white" }} >Proposal</Form.Label>
+                            <Form.Control as="select" name="proposal" onChange={(e) => this.filterMoveis(e)}>
+                                <option>All</option>
+                                <option>women</option>
+                                <option>man</option>
+                            </Form.Control>
+                        </Col>
+                           {/*  =============== History =============== */}
+                        <Col md={2}>
+                            <Form.Label style={{ color: "white" }}>History</Form.Label>
+                            <Form.Control as="select" name="history" onChange={(e) => this.filterMoveis(e)}>
+                                <option>All</option>
+                                <option>1990-1999</option>
+                                <option>2000-2009</option>
+                                <option>2010-2020</option>
+                            </Form.Control>
                         </Col>
                     </Row>
-                <Row className="mt-5 justify-content-center" >
+                    <Row className="mt-5 justify-content-center" >
 
-                     {this.state.loading ?  allmoveis : (<Circle />) }
+                        {this.state.loading ? allmoveis : (<Circle />)}
 
-                </Row>
+                    </Row>
 
                 </Container>
 

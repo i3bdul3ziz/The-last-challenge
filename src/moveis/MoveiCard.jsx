@@ -7,7 +7,7 @@ import { Link , withRouter } from 'react-router-dom'
 
         let { YourName, link, name, typee, history , _id} = this.props.movei
         return (
-            <Col md={3} className="m-2" style={{ borderStyle: "double", borderRadius: "30px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <Col md={3} xs={5} className="m-2" style={{ borderStyle: "double", borderRadius: "30px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <Image roundedCircle style={{ height: 150, width: 150 }} src={link} ></Image>
                 <p>{this.props.movei.name}</p>
                 <h5>{history}</h5>
